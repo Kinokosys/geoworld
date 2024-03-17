@@ -57,16 +57,21 @@
         <li class="nav-item">
           <a class="nav-link disabled" href="#">Disabled</a>
         </li>
+
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
-             aria-expanded="false">Dropdown</a>
+             aria-expanded="false">Countries</a>
+
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="#">Action</a>
-            <a class="dropdown-item" href="#">Another action</a>
-            <a class="dropdown-item" href="#">Something else here</a>
+
+          <?php foreach (getContinent() as $desContinents){?>
+            <a class = "dropdown-item" href="index2.php?continent=<?php echo $desContinents->Continent;?>"><?php echo $desContinents->Continent;?></a> 
+          <?php } ?>
+
           </div>
         </li>
       </ul>
+
       <ul class="navbar-nav ml-auto">
         <li class="nav-item">
           <a class="nav-link" href="login">Login</a>

@@ -32,31 +32,22 @@ require_once 'connect-db.php';
  */
 function getCountriesByContinent($continent)
 {
-    // pour utiliser la variable globale dans la fonction
     global $pdo;
-    $query = 'SELECT * FROM Country WHERE Continent = :cont;';
+    $query = 'SELECT * FROM Country WHERE Continent = :cont ORDER BY Region;';
     $prep = $pdo->prepare($query);
-    // on associe ici (bind) le paramètre (:cont) de la req SQL,
-    // avec la valeur reçue en paramètre de la fonction ($continent)
-    // on prend soin de spécifier le type de la valeur (String) afin
-    // de se prémunir d'injections SQL (des filtres seront appliqués)
     $prep->bindValue(':cont', $continent, PDO::PARAM_STR);
     $prep->execute();
-    // var_dump($prep);  pour du debug
-    // var_dump($continent);
-
-    // on retourne un tableau d'objets (car spécifié dans connect-db.php)
     return $prep->fetchAll();
 }
-
-/**
- * Obtenir la liste des pays
- *
- * @return liste d'objets
- */
 function getAllCountries()
 {
     global $pdo;
     $query = 'SELECT * FROM Country;';
+    return $pdo->query($query)->fetchAll();
+}
+ function getContinent() 
+{
+    global $pdo;
+    $query = 'SELECT DISTINCT Continent FROM Country;';
     return $pdo->query($query)->fetchAll();
 }
